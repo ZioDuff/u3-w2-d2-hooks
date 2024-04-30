@@ -2,16 +2,7 @@ import AddComment from "./AddComment"
 import CommentList from "./CommentsList"
 const { useState, useEffect } = require("react")
 
-//TODO2)CommentArea dovrà fare il fetch delle recensioni per il libro selezionato, e salvare i commenti nel proprio stato. Conterrà inoltre due sotto-componenti: CommentsList and AddComment.
-//TODO3)CommentsList mostrerà le recensioni del libro in un elenco; l'array di recensioni gli verrà passato come prop dal componente CommentArea. La singola recensione verrà visualizzata utilizzando un altro componente, chiamato SingleComment.
-//TODO4)AddComment conterrà un form per aggiungere il testo della recensione e il voto (da 1 o a 5). Questo componente dovrà permettere all'utente di fare la POST del nuovo commento sul libro selezionato.
-// *anche qua andiamo a far eun refacotr della nostra classe
 const CommentArea = (props) => {
-  //todo state = {
-  // todo  element: [],
-  //todo }
-  // ! state da cambiare
-
   const [element, setElement] = useState([])
 
   const getFetchComments = () => {
@@ -42,7 +33,7 @@ const CommentArea = (props) => {
 
   useEffect(() => {
     getFetchComments()
-  }, [])
+  }, [props.asin])
   return (
     <>
       <CommentList element={element} />

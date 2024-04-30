@@ -13,17 +13,6 @@ import CommentArea from "./CommentArea"
 // ? come fare?, dovremo innanzitutto cambiare il nostro componente a classe in funzione, e poi cambiare lo state principale in piu hooks
 
 const BookList = (props) => {
-  //todo state = {
-  //todo   abbiamo selezionato un array di partenza per poter poi effeturare un cambio di array
-  //todo   selectedJson: fantasy,
-  //todo   questo è il valore di partenza del nostro input per poter cercare i libri
-  //todo   searchValue: "",
-  //todo }
-  //! questo lo dobbiamo cambiare in hooks
-
-  // ? qui andiambo aprendere i stessi valori che avevamo nello state ma lo passiamo a costante e destruttiriamo l'array che ci torna indietro tramite i 2 parametri
-  //!questa destrutturazione andra fatta per ogni parametro che era nel nostro state
-  // * il primo paramentro è il valore nel nostro stato, il secondo è la funzione che ci serve per cambiare tale stato
   const [selectedJson, setSelectedJson] = useState(fantasy)
   const [searchValue, setSearchValue] = useState("")
 
@@ -107,20 +96,28 @@ const BookList = (props) => {
         </ButtonGroup>
       </div>
       {/* questo è l'equivalente delle row-cols  */}
-      <Row className="g-2 mt-3">
-        {filteredBooks.map((book) => {
-          return (
-            // la key viene sempre messa sul primo figlio del map
-            <Col xs={12} md={4} key={book.asin} className="mb-2">
-              {/* singleBook viene importato da un altro componente ma non è nient'altro che la struttura della card dove i valori vengono passati tramite props */}
-              <SingleBook
-                book={book}
-                selectedBook={selectedBook}
-                changeSelectedBook={changeSelectedBook}
-              />
-            </Col>
-          )
-        })}
+      <Row>
+        <Col md={8}>
+          <Row className="g-2 mt-3">
+            {filteredBooks.map((book) => {
+              return (
+                // la key viene sempre messa sul primo figlio del map
+                <Col xs={12} md={4} key={book.asin} className="mb-2">
+                  {/* singleBook viene importato da un altro componente ma non è nient'altro che la struttura della card dove i valori vengono passati tramite props */}
+                  <SingleBook
+                    asin={book.asin}
+                    img={book.img}
+                    title={book.title}
+                    category={book.category}
+                    price={book.price}
+                    selectedBook={selectedBook}
+                    changeSelectedBook={changeSelectedBook}
+                  />
+                </Col>
+              )
+            })}
+          </Row>
+        </Col>
         <Col md={4}>
           <CommentArea asin={selectedBook} />
         </Col>
